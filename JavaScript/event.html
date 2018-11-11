@@ -1,0 +1,27 @@
+<html>
+	<head></head>
+	<body>
+		<script type="text/javascript">
+			function btn_click(){
+				for(var i=0;i<3;i++){
+					alert("哎呀"+i);
+				}
+			}
+			
+			function fover(){
+				alert("里");
+			}
+			function fout(){
+				alert("外");
+			}
+			
+		</script>
+		
+		<input type="button" value="点我" onclick="btn_click()" />
+		<input type="button" value="点点我" ondblclick="btn_click()" />
+		
+		<div style='width:90%;height:400px;border:1px solid red' onmouseover="fover()" onmouseout="fout()">haha</div>
+		
+		
+	</body>
+</html>

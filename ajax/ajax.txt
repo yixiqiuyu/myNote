@@ -1,0 +1,70 @@
+Ajax
+Ajax引言
+	Ansynchronized JavaScript And XML（异步 JavaScript和 XML）
+	异步请求
+异步请求与同步请求
+	同步请求：地址栏 超链接 表单 location.href
+		问题：影响用户的交互体验
+		现象：同步请求响应给client是一张新的页面
+			  同步请求必须等待server的响应，才可以进行后续操作，否则操作无意义
+	异步请求：XMLHTTPRequest
+		现象：异步请求响应给client的不是一张新的页面，而是页面的一个局部（字符串）
+			  异步请求无需等待server的响应，可以直接进行后续操作
+		好处：用户的交互体验好
+异步请求的编码思路分析
+	异步请求对XMLHttpRequest是一个JavaScript对象，存在浏览器差异，简称xhr
+	1）创建xhr对象
+		Web Kit：var xhr=new XMLHttpRequest();
+		IE: var xhr=new ActiveXObject("Microsoft.XMLHTTP");
+		
+		if(window.XMLHttpRequest){ //如果为真则创建第一个，否则创建第二个
+			xhr=new XMLHttpRequest();
+		}else{
+			xhr=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	2）xhr对象发送请求并 传递参数
+		xhr.open("method","url"); 作用：发送请求   例如：xhr.open("get","/ajax/sendServlet");
+		xhr.send(); 作用：往服务器端传递参数
+	3）xhr处理响应
+		xhr.readyState 0---4
+		readyState==0 说明xhr对象未创建
+		readyState==1 说明xhr发送请求
+		readyState==2 说明服务器端的响应到达client
+		readyState==3 说明服务器端的响应开始解析
+		readyState==4 说明响应完毕
+			
+		
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				处理
+			}
+		}
+ajax操作中以post方式提交异步请求
+	a)	创建xhr
+		var xhr = new XMLHttpRequest();
+	b)	发送请求
+		xhr.open(“post”,”url”);
+		xhr.setRequestHeader(“Content-Type”,”application/x-www-form-urlencoded”);
+		xhr.send(“name=suns&password=123456&…”);
+	解释: 为什么在post方式提交数据时 需要指定 application/xxxx…?
+	答案: 在xhr操作中 没有了form 就没有enctype属性, 所以必须手工设置
+	c)	处理响应
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				xhr.responseText;
+			}
+		}	
+
+
+1.	jquery框架对于ajax的封装
+$.ajax({
+    type:”get|post”,
+    url:”/ajax/checkNameAjaxServlet”,
+    data:”name=xxx&password=xxx…”,
+    success:function(result){
+        result: 响应的结果字符串 等效 xhr.responseText
+    }
+});
+load(“url”)作用:加载页面的局部 url : servlet – url-pattern
+
+

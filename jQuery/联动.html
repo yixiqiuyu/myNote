@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		
+	</head>
+	<body>
+		省<select name="prov" id="">
+			
+		</select>
+		市<select name="city" id="">
+			
+		</select>
+		
+		
+		<script type="text/javascript">
+			var json=[
+				{
+					id:100,
+					name:"河北",
+					cities:["邯郸","石家庄","保定"]
+				},
+				{
+					id:101,
+					name:"河南",
+					cities:["开封","郑州","信阳"]
+				},
+				
+			]
+			
+			function init(){
+			//var prov=json[0].name;
+				for(var i=0;i<json.length;i++){
+					var pro=json[i].name;
+					var op=$("<option>"+pro+"</option>")
+					$("select[name=prov]").append(op);
+				}
+				//将河北的市显示在city
+				var cities=json[0].cities;
+				for(var j=0;j<cities.length;j++){
+					var opj=$("<option>"+cities[j]+"</option>");
+					$("select[name=city]").append(opj);
+				}
+				
+			}
+			$(function(){
+			init();
+			//对prov下拉列表添加onchange事件
+			$("select[name=prov]").change(chg);
+		})
+		
+			function chg(){
+			$("select[name=city]").empty();
+				//alert("jjj");
+				//先获得选项的下标---json中省份下标
+				 var index=$("select[name=prov]").get(0).selectedIndex;
+				 console.log(index);
+				 var cities=json[index].cities;
+				 //将cities添加在select：city
+				 for(var i=0;i<cities.length;i++){
+					var op=$("<option>"+cities[i]+"</optuion>");
+					$("select[name=city]").append(op);
+				 }
+			}
+		</script>
+	</body>
+</html>

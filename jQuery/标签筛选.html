@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		
+		<style type="text/css">
+			thead{
+				background-color:lightblue;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="">
+			图书：<input type="text" name="bookname"/>
+			价格：<input type="text" name="price">
+			<input type="button" value="添加" id="abadd">
+		</form>
+		<hr/>
+		<table align="center" border="1">
+			<thead>
+				<th>图书</th>
+				<th>价格</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>java编程思想</td>
+					<td>180￥</td>
+				</tr>
+				<tr>
+					<td>jQuery实战</td>
+					<td>45￥</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr/>
+		<div align="center"><input id="btn" type="button" value="删除选中"></div>
+		<script type="text/javascript">
+			//给删除选中按钮绑定事件
+			/*var btn=document.getElementById("btn");
+			btn.onclick=test;*/
+			
+			$(document).ready(function(){
+				$("#btn").toggle(function(){
+					alert(1);
+				},
+				
+				function(){
+					alert(2);
+				},
+				function(){
+					alert(3);
+				},
+				
+				);
+			});
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script>
+			var p={
+				name:"ge",
+				age:18,
+				getName:function(){return this.name}
+				
+			};
+			console.log(p);
+			for(m in p){
+				if(typeof(p[m])=="function"){
+					p[m]();
+				}else{
+					console.log(p[m]);
+				}
+			}
+		</script>
+	</head>
+	<body></body>
+</html>

@@ -1,0 +1,235 @@
+Struts2
+
+MVC模式
+MVC设计模式的概念：
+	Model模型：是指数据以及操作数据的逻辑
+	View视图：是指数据的展现方式
+	Controller控制器：用于控制应用程序的流程，在模型和视图之间起到
+						桥梁的作用
+	
+实际项目中MVC分别对应哪些类
+	Entity和Service类对应模型
+	JSP对应视图
+	Servlet（Action）对应控制器，负责接收请求参数、调用夜晚逻辑
+						、存储结果至作用域、转发至JSP视图
+
+MVC的优点：
+	多个视图能够共享一个模型，同一个模型可以被不同的视图所重用，
+	大大提高了代码的可重用性。例如：同一城市数据，可以粘纤维下拉列表，
+	也可以展现为树状结构
+	
+	控制器分离了模型和视图，让模型与视图保持相对独立，所以可以方便地改变
+	应用程序的数据和业务规划。例如：可以将数据库从MySQL移植到Oracle，
+	或者把RDBMS数据源改变为LDAP数据源，视图都会正确地显示
+	
+	总的来说，MVC的三个模块相互独立，改变其中一个不会影响到另两个
+
+
+Struts2
+	Struts2是一个实现了MVC模式的框架，它从另外两个MVC框架Struts和WebWork发展而来
+	并集成了两个框架的优点
+框架的意义在于
+	提供基础、通用的操作，让程序员不必从头开发，提高开发效率
+	让程序员的代码更为规范，必须按照框架的规范来编写代码，提高代码的可维护性
+
+Struts2的创建
+	1.导入jar包
+	2.配置前控制器StrutsPrepareAndExecuteFilter
+		打开web.xml文件添加如下配置
+			<filter>
+				<filter-name></filter-name>
+				<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+			</filter>
+			<filter-mapping>
+				<filter-name></filter-name>
+				<url-pattern>/*</url-pattern>
+			</filter-mapping>
+	3.编写后控制器Action类
+		创建Action类，Action类就是一个POJO（Plain Old Java Object）
+		Action类须要有一个无参构造方法，控制器方法的名字任意，但不能带
+		参数，并且返回值类型必须是String
+			Public class WelcomeAction{
+				public String abc(){
+					System.Out.Println("Hello World");
+					return null;
+				}
+			}
+	4.配置Action类，编写src/struts.xml
+		配置文件的名字和位置需是固定的：src/struts.xml，大小写也是敏感的
+		使用MyEclipse XML文件向导来创建它
+			<struts>
+				<!--
+					 package:配置文件的包，将配置文件分包放置管理
+					 name：包的名字
+					 namespace：是Action的访问前缀，即要访问namespace为“/a”的包中的name为“hello”的Action
+					 http://localhost:8888/Struts2/a/hello
+					 在namespace的支持下，较彻底的将配置文件分模块管理了
+				 -->
+				 <package name="baizhi" extends="struts-default" namespace="/a">
+					<!-- 
+						配置Action
+						name：等价于Servlet中的url-pattern 即要访问该Action要通过"/hello"
+						class:Action类的全限定名
+						
+					 -->
+					<action name="hello" class="com.baizhi.action.HelloWorldAction" method="abc"></action>
+					
+				 </package>
+			   
+
+			</struts>
+	5.	配置视图
+		接下来介绍控制器方法的返回值的含义：它代表了视图的名字，可以参考下图来讲解视图的配置和对应关系。
+	
+	6.接收请求参数
+		方法1：使用原始的HTTPServletRequest对象来获取请求参数（不推荐）
+			HttpServletRequest request=ServletActionContext.getRequest();
+			request.getParameter("请求参数名");
+			
+		方法2：使用Action的属性来接收请求参数
+			ACtion的属性与请求参数名一直并提供get，set方法（区分大小写）
+				1）验证请求参数其实是与set方法对应而非属性名
+				2）建议使用包装类型而非基本类型，这样可以用null值表示参数没有传递的情况
+			Action的属性类型设置为须要的类型，Struts能够为常见类型做转换
+Action的创建模式：	
+	非单例，每个请求都独享一个Action实例对象
+Action的生命周期：
+	一个请求，请求到来时创建，请求结束时销毁
+Action的创建方式：
+	1.implements Action
+	2.extends ActionSupport
+	3.POJO（推荐）
+	//ActionSupport 是Action的实现类（适配器模式）
+	Action中的默认执行的方法
+		public String execute()throws Exception{
+			.....
+		}
+		
+		
+多方法控制器：
+搭建：
+	public class MethodsAction {
+		public String queryUser(){
+			System.out.println("query");
+			return "query";
+			
+		}
+		
+		public String updateUser(){
+			System.out.println("update");
+			return "update";
+		}
+		
+		public String deleteUser(){
+			System.out.println("delte");
+			return "delete";
+		}
+	}
+配置：	
+	静态调用方法：
+		<package name="baizhi1" extends="struts-default" namespace="/methods">
+			<action name="query" class="com.baizhi.methods.action.MethodsAction" method="queryUser">
+				<result name="query">/index.jsp</result>
+			</action>
+			
+			<action name="update" class="com.baizhi.methods.action.MethodsAction" method="updateUser">
+				<result name="update">/index.jsp</result>
+			</action>
+			
+			<action name="delete" class="com.baizhi.methods.action.MethodsAction" method="deleteUser">
+				<result name="delete">/index.jsp</result>
+			</action>
+		</package>
+	动态方法调用：
+			<!-- 
+				动态方法调用 
+					name="user_*"中的*是通配符，匹配任意多个字符
+					//user_queryUser
+					//user_updateUser
+					每个请求到来时*都可以匹配到不同的内容
+					method="{1}"中的{1}是占位符，此位置上会填充*号当前匹配的内容
+					
+			-->
+			<action name="user_*" class="com.baizhi.methods.action.MethodsAction" method="{1}">
+				<result name="query">/index.jsp</result>
+				<result name="update">/index.jsp</result>
+				<result name="delete">/index.jsp</result>
+			</action>
+	在设计多方法的控制器时，尽量将逻辑相关的一组操作放到一个控制器中
+	静态方法调用和动态方法调用各有利弊
+	
+	
+OGNL表达式（对象图导航语言）
+	作用：寻址，取值
+	是独立的组件
+	取值来源：根 和 上下文
+		根：任何一个对象都可以成为OGNL的上下文
+		上下文：任何一个Map都可以成为OGNL的上下文
+		为OGNL指定根对象或上下文之后，之后OGNL即可以从中取值
+	从根对象中取值语法：
+		1）可通过属性名，获取属性值
+		2）如果取出的值是数组或集合，可通过[index]获取对应索引位置的元素
+		3)如果取出的值是实体对象，可通过 .属性名 获取对应的属性值
+		4）如果取出的值是Map，可通过 .key 获取对应的value
+	从上下文中取值语法：  *注意：从上下文中取值时，ognl要以【#】开头
+		1）可通过key获取value
+		2）如果取出的值是数组或集合，可通过[index]获取对应索引位置的元素
+		3)如果取出的值是实体对象，可通过 .属性名 获取对应的属性值
+		4）如果取出的值是Map，可通过 .key 获取对应的value
+
+
+值栈
+
+	值栈的概念：
+		Struts2提供的一个域，用来存储数据，实现从Action到JSP的数据传递
+	值栈的内部结构：
+		Root区域：栈结构
+		Context区域：Map
+	通过值栈完成数据传递：
+		Action：向值栈中存入值
+		JSP中：从值栈中取出值
+		
+拦截器Interceptor
+	作用：抽取多个Action中的重复内容，使得代码的冗余消除，且代码的管理代价更小
+		作用机制类似于filter
+	拦截器开发流程：
+		1. 实现Interceptor接口
+		2. 在intercept方法内：
+			调用了ai.invoke() 此拦截器放行，进入下一个拦截器，如果没有下一个拦截器，进入action的方法
+			没有调用ai.invoke(), 表示请求被拦截
+		3. intercept方法的返回值表示，当请求被拦截时，要跳转到的视图名
+		
+			配置：
+				<!--声明拦截器-->
+					<interceptors>
+						<interceptor name="hehe" class="com.baizhi.interceptor.MyInterceptor"></interceptor>
+					</interceptors>
+				<!--引用拦截器-->
+				<action name="interceptorsaction" class="com.baizhi.interceptor.action.QueryActoin" method="query">
+					<interceptor-ref name="hehe"></interceptor-ref>
+					<result name="success">/index.jsp</result>
+				</action>
+			注意：当一个Action引用了多个拦截器时，拦截顺序即引用顺序
+	拦截器栈：
+		将多个零散的拦截器打包，便于引用
+			<interceptors>
+				<interceptor name="hehe" class="com.baizhi.interceptor.MyInterceptor"></interceptor>
+				
+				<!-- 拦截器栈 -->
+				<interceptor-stack name="stackhehe">
+					<interceptor-ref name="hehe"></interceptor-ref>
+				</interceptor-stack>
+			</interceptors>
+			<action name="interceptorsaction" class="com.baizhi.interceptor.action.QueryActoin" method="query">
+				<interceptor-ref name="stackhehe"></interceptor-ref>
+				<result name="success">/index.jsp</result>
+			</action>
+
+上传:客户端文件传输给服务器
+	将客户端硬盘数据传送给服务器
+	服务器接收文件到内存，并进一步将文件写出到硬盘
+
+
+		
+		
+	

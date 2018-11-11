@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<style type="text/css">
+			div 
+			{
+				
+				padding: 20px;
+				border-style: solid;
+				border-top-width: 15px;
+				border-right-width: 5px;
+				border-bottom-width: 15px;
+				border-left-width: 5px;
+			}
+		</style>
+		<script type="text/javascript" src="jquery-3.3.1.js"> </script>
+		<script type="text/javascript">
+			function test1(){
+				//通过元素选择器选择div标签
+				//$("div").css("background-color","red");
+				//通过类选择器获取div标签
+				//$(".dd").css("background-color","yellow");
+				//通过后代选择器选标签
+				//$("#td div").css("background-color","red");
+				//通过父子选择器选择标签
+				//$("#d2>span").css("background-color","yellow");
+				//紧邻兄弟选择器
+				//$("#d1~div").css("background-color","yellow");
+				//简单过滤选择器
+				//$("div:first").css("background-color","green");
+				$("div:eq(3)").css("background-color","green");
+			}
+		</script>
+	</head>
+	<body id="td">
+		<div>div0</div>
+		<div class="dd">div1</div>
+		<div class="dd">div2</div>
+		<div id="d1">div3</div>
+		<div>div4</div>
+		<div id="d2">
+			<span>span0</span>
+			<span>span1</span>
+		</div>
+		<div></div>
+		<div style="dispay:none">div6</div>
+		<input type="button" value="测试按钮" onclick="test1()"/>
+	</body>
+</html>

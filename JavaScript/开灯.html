@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		<script type="text/javascript">
+			//绑定事件
+			$(function(){
+				$("#img1").hover(on,off);
+			});
+			function on(){
+				//修改图片路径为开灯
+				$("#img1").attr("src","images/bulb_on.png");
+			}
+			function off(){
+				$("#img1").attr("src","images/bulb_off.jpg");
+			}
+		</script>
+	</head>
+	<body>
+		<img id="img1" src="images/bulb_off.jpg" />
+	</body>
+</html>

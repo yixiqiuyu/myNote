@@ -1,0 +1,150 @@
+<html>
+	<head></head>
+	<body>
+		编号：<input id="s_id" type="text"></br>
+		商品名：<input id="name" type="text"></br>
+		价格：<input id="price" type="text"></br>
+		<input type="button" value="添加" onclick="addRow()">
+		<hr/>
+		<table cellpadding="0" align="center" border="1" width="80%" >
+			<tbody id="tbody1">
+				<tr style="background-color:blue;color:white">
+					<td>选项</td>
+					<td>商品编号</td>
+					<td>商品名称</td>
+					<td>商品价格</td>
+					<td>删除商品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="personid"/></td>
+					<td>001</td>
+					<td>iphone 5s</td>
+					<td>3888</td>
+					<td><input type="button" value="delete" onclick="deleteRow(this)"/></td>
+				</tr>
+			</tbody>
+		</table>
+		<center>
+			<input type="button" value="全选" onclick="selectAll()"/>
+			<input type="button" value="反选" onclick="noselectAll()"/>
+			<input type="button" value="全不选" onclick="noSelect()"/>
+			<input type="button" value="删除选中" onclick="deleteSelect()"/>
+		</center>
+		
+		<script type="text/javascript">
+			function addRow(){
+				/*
+					将三个input内容添加至table中的一个tr
+				*/
+				//alert("haha");
+				//获取input输入的值
+				var jsid=document.getElementById("s_id").value;
+				var jsname=document.getElementById("name").value;
+				var jsprice=document.getElementById("price").value;
+				//创建5个td
+				var td1=document.createElement("td");
+				td1.innerHTML='<input type="checkbox" name="personid"/>';
+				var td2=document.createElement("td");
+				td2.innerHTML=jsid;
+				var td3=document.createElement("td");
+				td3.innerHTML=jsname;
+				var td4=document.createElement("td");
+				td4.innerHTML=jsprice;
+				var td5=document.createElement("td");
+				td5.innerHTML='<input type="button" value="delete" onclick="deleteRow(this)"/>';
+				//创建tr
+				var tr=document.createElement("tr");
+				tr.appendChild(td1);
+				tr.appendChild(td2);
+				tr.appendChild(td3);
+				tr.appendChild(td4);
+				tr.appendChild(td5);
+				//将tr绑定在tbody子标签中
+				document.getElementById("tbody1").appendChild(tr);
+				//
+			}
+			
+			function deleteRow(delbtn){
+				//delbtn代表delete删除按钮
+				//1 先获得要删除的对象
+				var tr=delbtn.parentNode.parentNode;
+				//2 获得要删除对象的直接父对象
+				var tb=tr.parentNode;
+				//3 调用父对象.removeChild(子对象);
+				tb.removeChild(tr);
+			
+			}
+			
+			//全选
+			function selectAll(){
+				//获得所有的checkbox
+				//遍历所有的checkbox
+				//对每个对象添加checked属性
+				var inps=document.getElementsByTagName("input");
+				for(var i=inps.length-1;i>=0;i--){
+					if(inps[i].type=="checkbox"){
+						inps[i].checked=true;
+					}
+				}
+			}
+			
+			//全不选
+			function noSelect(){
+				var inps=document.getElementsByTagName("input");
+				for(var i=inps.length-1;i>=0;i--){
+					if(inps[i].type=="checkbox"){
+						if(inps[i].checked==true){
+							inps[i].checked=false;
+						}
+					}
+				}
+			}
+			
+			//反选
+			function noselectAll(){
+				
+				var inps=document.getElementsByTagName("input");
+				for(var i=inps.length-1;i>=0;i--){
+					if(inps[i].type=="checkbox"){
+						inps[i].checked=!inps[i].checked;
+					}
+				}
+			}
+			
+			//删除选中
+			function deleteSelect(){
+				
+				
+			}
+		</script>
+		
+	<body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

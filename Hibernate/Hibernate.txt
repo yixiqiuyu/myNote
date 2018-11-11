@@ -1,0 +1,71 @@
+Hibernate
+概念：hibernate是一个数据库持久层的框架，解决的是数据库CRUD（增删改查）问题
+核心的设计思想：
+		映射  实体<--->表
+Hibernate的开发步骤
+	www.hibernate.org 下载Hibernate官方zip
+	需要的jar包：
+		1.hibernate核心jar
+		2.hibernate第三方依赖jar
+		3.ojdbc5jar
+	hibernate配置文件
+		1.hibernate.cfg.xml
+			作用：用于配置hibernate运行相关参数的一个配置文件
+			相关参数：
+				dialect方言：告知hibernate连接的是哪种数据库，hibernate会根据这种
+							数据库的特点，进行优化
+				show_sql：true|false   是否显示sql语句
+			
+		2.xxx.hbm.xml映射文件（注解 Annotation @xxx）
+			文件名必须以.hbm.xml结尾  前面随便
+			放置位置：随便
+
+Hibernate的核心对象
+	1.Configuration对象
+		专门读取hibernate相关配置文件
+	2.SessionFactory
+		创建Session对象
+	3.Session对象
+		session整个hibernate框架的核心，负责对数据进行CRUD操作
+		注意：hibernate内部封装Connection对象，一一对应
+	4.Transaction事务
+		tx.begin()
+		tx.commit()
+		tx.rollback()
+		注意：hibernate增删改操作必须手工控制事务
+	5.Query查询
+		负责在hibernate中进行复杂查询
+		session.get() 以主键为条件的查询
+		
+Hibernate的开发步骤：（ORM） O:对象 R：数据库  M：映射文件
+	1.O 实体对象
+	2.R 创建数据库中的表
+	3.M 映射文件
+	4.映射文件的注册：hibernate.cfg.xml注册
+	5.API测试
+		Session.CRUD
+	
+HibernateUtil工具类
+	Configuration：封装整个配置文件的读取过程，2种配置文件全部读取，
+					一次性的把配置文件的内容，全部加载到内存中
+	SessionFactory：是用于创建Session对象。重量级资源，SessionFactory占用很多的内存，功能多
+		注意：在一个应用中，只创建一个SessionFactory对象
+				SessionFactory 线程安全的对象
+	Session：完成数据库的CRUD操作，内部封装了Connection，一一对应
+			轻量级的资源，内存占用少，功能单一（CRUD）
+		注意：Session不允许被多线程（多用户、多请求）共享
+
+		
+HibernateUtil的封装
+	目的：封装创建Session的对象
+	
+SessionFactory.getCurrentSession()
+	注意：SessionFactory.openSession()与getCurrentSession()的区别：
+		openSession()每一次调用HIbernate都会创建新的Session.
+		getCurrentSession()这个方法会把创建好的Session放置到ThreadLocal中，
+		从而保证一个线程一个Session，用于控制事务
+	getCurrentSession()的注意事项
+		1.必须要在hibernate.cfg.xml中进行额外的配置
+		2.getCurrentSession获得的Session对象必须运行在事务之中（查询也要事务）
+		3.getCurrentSession获得的Session对象，在事务结束时，会自动关闭
+	

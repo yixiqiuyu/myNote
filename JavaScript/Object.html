@@ -1,0 +1,53 @@
+<html>
+	<head></head>
+	<body>
+		<script type="text/javascript">
+			var a="abc";
+			console.log(a.indexOf("ab"));
+			console.log(a.length);
+			console.log(a.charAt(1));
+			
+			//获得当前系统时间
+			var dt=new Date();
+			console.log(dt);
+			console.log("年："+dt.getFullYear());
+			console.log("月："+(dt.getMonth()+1));
+			console.log("日："+dt.getDate());
+			
+			//求4的平方根
+			var m=Math.sqrt(4);
+			console.log(m);
+			//获取一个随机值
+			var n=Math.round(Math.random()*100);
+			console.log(n);
+			/*
+				数组：
+					java int[] as=new int[10];   数组的长度不可变
+					js var arra=[];		数组长度可变，数据类型无限制
+			*/
+			var as=[1,"2",new Date(),4];
+			console.log(typeof(as));
+			as[4]="haha";//添加值
+			as.push(5,6,7);
+			as.splice(0,3);
+			as.unshift(1,2,3);
+			as.reverse();
+			as.join("-");
+			//var num=as.pop();
+			//console.log(num);
+			console.log(as);
+			//console.log(as[1]);//访问值
+			//console.log(as[7]);
+			//console.log(as.length);//数组长度
+			/*console.log("..........");
+			for(var i=0;i<as.length;i++){
+				console.log(as[i]);//可以获取undefined的值
+			}
+			console.log("----------");
+			for(i in as){
+				console.log(as[i]);//无法获得不存在的值undefined	
+			}
+			*/
+			</script>
+	</body>
+</html>

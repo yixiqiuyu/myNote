@@ -1,0 +1,341 @@
+JavaScript：网景Natscape，基于浏览器的、解释型的、脚本语言（写在HTML中）
+作用：
+	（1）表单验证
+	（2）页面特效
+	（3）操作页面元素
+注意：JS是弱类型语言；严格区分大小写
+
+1.引入js方式
+	在HTML代码中通过<script>标签嵌套js代码
+	<script type="text/javascript">
+		//js语句
+	</script>
+2.变量（定义变量）变量类型和数据类型
+		定义变量：
+			var 变量名；
+		变量赋值：
+			变量名=值；
+		注意：JavaScript中只有数据类型，没有引用（变量）类型
+3.特殊值
+	null：空（没有指向任何对象，该变量的值就是null）
+	undefined：未定义（声明变量，未赋值）
+	NaN：非数（如果将一个"aaa"转换成数字，转换失败后的结果就是NaN）
+
+
+	
+	
+运算符：
+	1.+ = * / >= < <=
+	2.等值判断 == === =! !==
+		1)内容判断
+			== !=
+		2)内容和数据类型同时等值判断
+			=== !==
+	3.逻辑运算符
+		&& || ！
+	4.三目运算符
+		boolean表达式？值1：值2
+	5.typeof 变量名  //查看变量类型
+		//值为：Number String object undefined function的字符串值
+	
+5.数据类型
+	数字
+	字符串
+	布尔
+	特殊类型
+		字面值     类型
+		undefined   undefined
+		null        object
+		NaN         Number
+	复合类型
+		Object
+		Array
+		Function
+		Math
+		Date
+		
+JavaScript流程控制
+	if(条件){}
+
+	if(条件){} else{}
+
+	switch(){
+		case 1:
+			语句;break;
+		default:
+	}
+
+	while(){}
+
+	do{}while{}
+
+	for(var i=0;i<10;i++){}
+
+	for(xx in xx){}  for-each语句
+内置函数：
+	parseInt(sn); //将字符串sn转换成数字123
+	isNaN(n);  //判断变量n中的内容是否是非数
+	typeof(v); //获取变量v中值的数据类型(结果是字符串)
+
+自定义函数：
+	1）自定义函数
+		function 函数名（形参表）{
+			//函数体
+		}
+	2）js中函数也是一种对象，类型为function
+		var 函数名=function(形参表){
+			//函数体
+		}
+	3）通过Function构造函数创建函数
+		var fun3=new Finction('arg1','arg2',...,'argN','函数体');
+
+js函数特点：
+	1）js中函数没有重载，只要函数名相同，参数多少都可以调用
+	2）函数的所有实参，都被放在一个叫做arguments的数组中
+		//arguments只能在函数内部使用
+		
+		
+		
+String字符串
+1.定义字符串
+	var s1="abc"; //将s1指向字符串"abc"
+	var s2=new String("abc");//新创建一个字符串"abc",并指向s2
+	
+2.字符串常见函数
+	indexOf(str);//在字符串查找str第一次出现的位置，并返回，不存在则返回-1
+	charAt(index);//返回i位置的字符串
+	split(str);//根据str对字符串进行拆分
+	replace(s1,s2);//将字符串中第一个s1替换成s2
+3.常见属性
+	length：字符串的长度
+	
+
+Date日期
+1.创建
+	var dt=new Date();//获取当前系统时间
+	var dt=new Date('1996-07-12');//创建一个指定日期对象
+2.常见函数
+	getFullYear();//获得年份数字
+	getDate();//获得日期数字（1~31）
+	getMonth();//获得月份（0~11）
+	getDay();//获得周（0~6：星期日~星期六）
+	getTime();//获得时间的毫秒值（1970-1-1到现在）
+	getHours();//时（24时）
+	getMinutes();//分
+	getSeconds();//秒
+	toLocaleString();//将日期转换为本地日期显示格式
+
+Math
+1.数学函数*静态方法，直接使用Math.函数名();
+	abs(n);//求取n的绝对值
+	sqrt(n);//开平方
+	round(n);//四舍五入，得到整数
+	ceil(n);//向上靠拢截取数据
+	floor(n);//乡下靠拢截取数据
+	random();//随机生成0~1之间的任意一个值
+Array数组
+特点：
+	1）没有固定长度
+	2）同一数组中可以放任意类型的数据
+1.创建数组
+	1）var arr=new Array();
+	2）var arr=[元素1，元素2，元素3...]
+2.属性
+	length   //数组的长度
+3.常见方法
+	push(e1,e2,...en);//向数组末尾按照顺序追加元素
+	splice(n,len);//从n下标开始删除，一次总共删除len个
+	pop();//删除数组中最后一个元素，并将该元素返回
+	shift();//删除数组中的第一个元素，并将该元素返回
+	unshift(e1,e2,...,en);//向数组中的第一个元素之前，添加n个元素
+	reverse();//将数组元素倒置
+	join(str);//将数组元素用str拼接成字符串返回（不给参数默认按照','号进行拼接）
+	sort(sortFunction);
+				/*
+					对数组元素进行排序，按照sortFunction给定的排序规则，对数组元素进行
+					排序，如果不指定排序规则函数，默认将数据按照字符串的排序规则进行排序
+					（按照字母顺序）
+				*/
+
+Object对象
+1.JSON形式创建对象（最常见）
+	var p={
+		属性名1：值1，
+		属性名2：值2，
+		...
+	};
+2.通过new Object
+	var p=new Object();
+
+访问属性：
+	p.属性名1；
+修改属性
+	p.属性名2=新值2；
+添加属性
+	p.属性名3=值3；
+删除属性
+	delete p.属性名；
+遍历对象的属性
+	for(变量名 in 对象){
+		alert{对象[变量名]}；//遍历属性名过程中，变量代表当前属性名的字符串形式
+	}
+
+
+JavaScript事件
+事件是可以被JavaScript侦测到的行为
+1.事件的组成：
+	事件源 事件对象 监听器
+	事件源：产生事件的源头
+	事件对象：当出现事件行为时，会产生代表事件的对象 event
+	事件监听器：用来监听特定的事件对象，并且绑定当此事件发生后所执行的方法 function
+常见事件类型
+1.鼠标相关
+	onclick 单机事件
+	ondblclick 双击事件
+	onmouseover 鼠标移入
+	onmouseout 鼠标移出
+	onmousemove 鼠标移动
+	onmousedown鼠标按下
+	onmouseup鼠标松开
+2.键盘相关
+	onKeyDown
+	onKeyUp
+3.body相关事件
+	onload=fun //页面加载时触发fun方法
+	onunload 窗口离开时触发（刷新，返回，前进，主页）
+	onscroll 页面滚动
+	onresize 页面缩放
+4.form表单控件相关事件
+	onblur 当前元素失去焦点
+	onchange 当前元素失去焦点，并且值改变时
+	onfocus 当前元素获得焦点时
+	onsubmit 表单提交时
+
+事件注意事项
+1.内部元素产生事件，默认会向父元素扩散------事件冒泡
+	取消事件冒泡：
+		（IE）event.cancelBubble=true;
+		（FF CHM）event.stopPropagation();
+2.取消事件的默认行为
+	<a href="javascript:void(0);"></a>//点击超链接不会跳转
+	<a href="a.html" onclick="return false;"></a>//点击超链接不会跳转
+	<form action="" method="" onsubmit="return false">//点击提交按钮不会提交表单
+
+DOM  document object model
+	文档对象模型
+	浏览器在对HTML中的标签渲染显示时，会将其中的每个标签映射成一个
+	JavaScript对象，根据html中标签的关系，会将对应的对象映射成一个Tree结构模型
+
+查找DOM对象
+	1.document.getElementById("id");//根据id查找dom对象
+	2.document.getElementByTagName("标签名");
+	3.document.getElementsByName("标签的name属性值");
+	4.document.getElementsByClassName("class名");
+	5.表单：
+		获取表单元素：var obj=document.表单名.表单元素名;
+		var inputTxt=document.form1.username;
+		
+		<form action="" name="form1">
+			<input type="text" name="username"/>
+		</form>
+
+		
+操作DOM对象属性
+1.操作dom对象的属性【重点】
+	dom对象.标签属性名=新值;//修改值
+	var val=dom对象.标签属性名;//获取值
+2.操作dom对象的标签体内容
+	HTML对象名.innerHTML="可以有HTML标签";
+3.操作HTML对象的样式属性
+	1）HTML对象名.style.样式属性名=新值;
+		注意，js的样式属性名，是在原css样式属性的基础上去掉中间
+		"-"符号，其后的首字母改大写，如background-color --->backgroundColor;
+		如果没有"-"符号，则一致。
+	2）HTML对象名.className=新值;	
+	
+
+DOM树的增删改
+1.创建文本节点（标签体的文本内容）
+	var txtNodeObj=document.createTextNode("文本内容");
+2.创建html对象（开始和结束标签）
+	var obj=document.createElement("标签名称");
+3.添加节点HTML对象
+	父对象.appendChild(子对象);
+4.替换html对象
+	父对象.replaceChild("新对象，旧对象");
+5.删除HTML对象
+	父对象.removeChild(子对象);
+6.在指定位置添加HTML对象
+	父对象.insertBefore(新对象，旧对象);
+7.相关属性
+	dom对象.parentNode	当前对象的父对象
+			.childNodes	当前对象的所有子对象构成的数组【浏览器差异，是否包含空白换行字符】
+			.firstNode	第一个子对象【浏览器差异，是否包含空白换行字符】
+			.lastChild	最后一个子对象【浏览器差异，是否包含空白换行字符】
+			.nextSibling	后面一个子对象【浏览器差异，是否包含空白换行字符】
+			.previousSibling	前面一个子对象【浏览器差异，是否包含空白换行字符】
+	
+
+Select元素
+常见属性
+	sel下拉列表对象.option  值为数组，代表下拉列表里所有的option选项
+	sel下拉列表对象.selectIndex 代表被选中的option的下标（从0开始）
+	构建一个option var op=new Option(text,value);
+	清空下拉列表 tag.options.length=0;
+	
+	
+BOM
+BOM Browser Object Model 浏览器对象模型
+提供了一组用于操作和浏览器相关的方法和属性
+1.windows 代表当前打开的浏览器，使用时window对象可以省略
+	window.alert(msg); //弹出警告框，提示msg消息
+	window.open(url); //打开新IE，加载url对应的资源
+	window.close(); //关闭当前IE
+	var result=prompt(msg,defaultStr);
+		//弹出输入框，提示msg消息，并且输入框中的默认值是defaultStr
+		//如果点“确认”按钮，返回输入框中诸如的字符串，点"取消"，返回null
+	var bn=confirm(msg);
+		//弹出确认对话框，提示msg消息
+		//如果点“确认”按钮，返回true；点“取消”，返回false
+2.document  代表当前打开的HTML网页
+	document.write(s);
+3.location    url地址栏
+	location.href  //地址栏中的字符串
+4.延迟定时器
+	var id=window.setTimeout("fun()",time);
+	fun为定时执行的方法
+	time为毫秒
+5.周期定时器
+	var id=window.setInterval("fun()",time);	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

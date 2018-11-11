@@ -1,0 +1,37 @@
+<html>
+	<head></head>
+	<body>
+		<script type="text/javascript">
+			//定义函数
+			function f1(a,b){
+				console.log(a);
+				console.log(b);
+				return a+b;
+			}
+			//调用函数
+			/*
+				1.只需要明确函数名即可调用，语法上不显示实参个数
+				2.调用时，参数个数不限制
+				3.形参类型和返回值类型不需要声明出来
+			*/
+			 //js中函数也是一种对象
+			 var f2=function(a,b){
+			 //函数内部有一个局部变量 arguments：数组，保存了函数调用时，所传入的实际参数
+			 console.log(arguments);
+				return a*b;
+			 }
+			f2(2,4);
+			//console.log(h);
+			//console.log(typeof(f2));
+			
+			var fun3=new Function('a','b','return a+b');
+			console.log(fun3(5,6));
+			
+			function myfunction(f){
+				console.log(f(10,2));
+			}
+			myfunction(f1)
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<style type="text/css">
+		.error{
+			color:red;
+		}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//用户名提示
+			function cname(inp){
+				var reg=/^[a-zA-Z]\w{5,}$/;
+				if(reg.test(inp.value)){
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="";
+				}else{
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="用户名格式错误";
+				}
+			}
+			//密码提示
+			function cpwd(inp){
+				//密码必须是6位数字
+				var reg=/^\d{6}$/;
+				if(reg.test(inp.value)){
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="";
+				}else{
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="密码格式错误";
+				}
+			}
+			
+			//年龄提示
+			function cage(inp){
+				//年龄必须是2位数字
+				var reg=/^\d{2}$/;
+				if(reg.test(inp.value)){
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="";
+				}else{
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="年龄输入错误";
+				}
+			}
+			
+			//邮箱提示
+			function cemail(inp){
+				//邮箱格式
+				//var reg=/^\w+@[0-9a-Z]+(\.\w+){1,2}$/;
+				var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+				if(reg.test(inp.value)){
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="";
+				}else{
+					var sp=inp.parentNode.parentNode.getElementsByTagName("span")[0];
+					sp.innerHTML="邮箱格式错误";
+				}
+			}
+			
+			
+			/*function checkform(fm){
+				cname(fm.username);
+				cpwd(fm.password);
+				cage(fm.age);
+				cemail(fm.email);
+				var spans=document.getElementByClassName("error");
+				for(var i=spans.length;i>=0;i--){
+					if(spans[i].innerHTML!=""){
+						retuen false;
+					}
+				}
+				return true;
+			}*/
+		</script>
+		<form name="form1" onsubmit="return checkform(this)">
+		<table>
+			<tr>
+				<td></td>
+				<td></td>
+				<td><span class="error"></span></td>
+			<tr>
+			
+			<tr>
+				<td>用户名</td>
+				<td><input type="text" name="usename" onblur="cname(this)"></td>
+				<td><span class="error"></span></td>
+			<tr>
+			
+			<tr>
+				<td>密码</td>
+				<td><input type="password" name="password" onblur="cpwd(this)"></td>
+				<td><span class="error"></span></td>
+			<tr>
+			
+			<tr>
+				<td>年龄</td>
+				<td><input type="text" name="age" onblur="cage(this)"></td>
+				<td><span class="error"></span></td>
+			<tr>
+			
+			<tr>
+				<td>邮箱</td>
+				<td><input type="text" name="email" onblur="cemail(this)"></td>
+				<td><span class="error"></span></td>
+			<tr>
+		</table>
+		</form>
+		<input type="submit" value="保存">
+		
+	</body>
+</html>

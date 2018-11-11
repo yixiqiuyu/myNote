@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#abadd").click(add);
+				$("#chk").click(checkAll);
+			})
+			function checkAll(){
+				//alert("hhhhh");
+				//当当前checkbox被选中时，全选，否则全不选
+				//获取当前checkbox的checked属性
+				console.log($("#chk").prop("checked"));
+				if($("#chk").prop("checked")){
+					//被选中，然tbody中的需哦有checkbox选中
+					$("tbody input:checkbox").prop("checked",true);
+				}else{
+					$("tbody input:checkbox").prop("checked",false);
+				}
+			}
+			function add(){
+				//alert("add");
+				//获取input输入的值
+				console.log($("input[name=bookname]"));
+				var bookname=$("input[name=bookname]").val();
+				var price=$("input[name=price]").val();
+				//创建td--tr--绑定tbody
+				//创建td
+				var td1=$("<td><input type='checkbox' ></td>");
+				//var td2=$("<td>"+bookname+"</td>");
+				//var td3=$("<td>"+price+"</td>");
+				var td2=$("<td></td>").text(bookname);
+				var td3=$("<td></td>").text(price);
+				
+				var td4=$("<td><a href='#'>删除</a></td>");
+				//创建tr
+				var tr=$("<tr></tr>");
+				tr.append(td1);
+				tr.append(td2);
+				tr.append(td3);
+				tr.append(td4);
+				//将tr添加到tbody
+				$("tbody").append(tr);
+				
+				
+			}
+		</script>
+		
+		<style type="text/css">
+			thead{
+				background-color:lightblue;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="">
+			图书：<input type="text" name="bookname"/>
+			价格：<input type="text" name="price">
+			<input type="button" value="添加" id="abadd">
+		</form>
+		<hr/>
+		<table align="center" border="1">
+			<thead>
+				<th><input type="checkbox" id="chk"/>全选</th>
+				<th>图书</th>
+				<th>价格</th>
+				<th>删除</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" ></td>
+					<td>java编程思想</td>
+					<td>180￥</td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" ></td>
+					<td>jQuery实战</td>
+					<td>45￥</td>
+					<td><a href="#">删除</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<hr/>
+		<div align="center"><input id="btn" type="button" value="删除选中"></div>
+		
+	</body>
+</html>
