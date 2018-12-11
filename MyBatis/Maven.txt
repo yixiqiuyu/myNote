@@ -1,0 +1,25 @@
+Maven
+	
+maven介绍及环境搭建：
+	maven是基于项目对象模型（POM），可以通过一小段描述信息来管理
+	项目的构建、报告和文档的软件项目管理工具
+
+maven基本目录结构
+	src
+		--main
+			--package
+		--test
+			--package
+		--resource
+			资源文件
+	pom.xml
+	
+maven的基本命令：
+	mvn -v 查看maven版本
+		compile 编译
+		test 测试
+		package 打包项目
+		
+		clean 删除target
+		install 安装jar包到本地项目中
+		

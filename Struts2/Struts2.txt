@@ -10,7 +10,7 @@ MVC设计模式的概念：
 实际项目中MVC分别对应哪些类
 	Entity和Service类对应模型
 	JSP对应视图
-	Servlet（Action）对应控制器，负责接收请求参数、调用夜晚逻辑
+	Servlet（Action）对应控制器，负责接收请求参数、调用业务逻辑
 						、存储结果至作用域、转发至JSP视图
 
 MVC的优点：

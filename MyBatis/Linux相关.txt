@@ -1,0 +1,26 @@
+linux环境下安装jdk：
+方法1：用yum安装jdk
+	1.查看yum库中都有哪些jdk版本
+		yum search java|grep jdk
+	2.选择版本，进行安装
+		yum install java-1.8.0-openjdk
+		安装完之后，默认的安装目录是在：/usr/lib/jvm/java-1.8.0-openjdk...
+	3.设置环境变量
+		vi /etc/profile
+		在profile中添加如下内容：
+			#set java environment
+			JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk...
+			JRE_HOME=$JAVA_HOME/jre
+			CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+			PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+			export JAVA_HOME JRE_HOME CLASS_PATH PATH
+		让修改生效
+			source /etc/profile
+	4.验证是否安装成功
+		java -version
+		
+Error【1146】：Table 'xxx.xxx' doesn't exist问题原因及解决方法：
+	1.插入数据或更改数据时使用的表输入错误
+	2.linux的mysql区分大小写，数据库中的表名与输入的sql语句中的使用的表名大小写不一致导致的
+	3.数据库操作时，误删mysql的文件导致(常见于数据库升级或迁移)
+	4.在编译安装mysql时，没有指定innodb存储引擎
