@@ -50,3 +50,103 @@ mavenÖÐµÄ×ø±êºÍ²Ö¿â£º
 		±¾µØ²Ö¿âºÍÔ¶³Ì²Ö¿â
 	¾µÏñ²Ö¿â£º
 		
+mavenÉúÃüÖÜÆÚ£º
+	clean ÇåÀíÏîÄ¿
+		pre-clean Ö´ÐÐÇåÀíÇ°µÄ¹¤×÷
+		clean ÇåÀíÉÏÒ»´Î¹¹½¨Éú³ÉµÄÎÄ¼þ
+		post-clean  Ö´ÐÐÇåÀíºóµÄ¹¤×÷
+	default ¹¹½¨ÏîÄ¿£¨×îºËÐÄ£©
+		compile test package install
+	site Éú³ÉÏîÄ¿Õ¾µã
+		pre-site ÔÚÉú³ÉÏîÄ¿Õ¾µãÇ°ÒªÍê³ÉµÄ¹¤×÷
+		site Éú³ÉÏîÄ¿µÄÕ¾µãÎÄµµ
+		post-site ÔÚÉú³ÉÏîÄ¿Õ¾µãÖ®ºóÒªÍê³ÉµÄ¹¤×÷
+		site-deploy ·¢²¼Éú³ÉµÄÕ¾µãµ½·þÎñÆ÷ÉÏ
+
+pom.xml³£ÓÃÔªËØ½éÉÜ£º
+	<?xml version="1.0" encoding="ISO-8859-1"?>
+	<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+		<!--Ö¸¶¨ÁËµ±Ç°pomµÄ°æ±¾-->
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>com.gejian.maven01(·´Ð´µÄ¹«Ë¾ÍøÖ·+ÏîÄ¿Ãû)</groupId>
+		<artifactId>maven01-module(ÏîÄ¿Ãû+Ä£¿éÃû)</artifactId>
+		<!--
+			µÚÒ»¸ö0´ú±í´ó°æ±¾
+			µÚ¶þ¸ö0´ú±í·ÖÖ§
+			µÚÈý¸ö0´ú±íÐ¡°æ±¾
+			snapshot ¿ìÕÕ
+			alpha ÄÚ²¿²âÊÔ
+			beta ¹«²â
+			Release ÎÈ¶¨
+			GA ÕýÊ½·¢²¼
+		-->
+		<version>0.0.1SNAPSHOT</version>
+		<!--Ä¬ÈÏÊÇjar
+			war zip pom
+		-->
+		<packaging></packaging>
+		<!--ÏîÄ¿ÃèÊöÃû-->
+		<name></name>
+		<!--ÏîÄ¿µØÖ·-->
+		<url></url>
+		<!--ÏîÄ¿ÃèÊö-->
+		<description></description>
+		<!--¿ª·¢Õß-->
+		<developers></developers>
+		<!--Ðí¿ÉÖ¤ÐÅÏ¢-->
+		<licenses><licenses>
+		<!--×éÖ¯ÐÅÏ¢-->
+		<organization></organization>
+		
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+				<type></type>
+				<scope></scope>
+				<!--ÉèÖÃÒÀÀµÊÇ·ñ¿ÉÑ¡  Ä¬ÈÏÊÇfalse-->
+				<optional></optional>
+				<!--ÅÅ³ýÒÀÀµ´«µÝÁÐ±í-->
+				<exclusions>
+					<exclusion></exclusion>
+				</exclusions>
+			</dependency>
+		</dependencies>
+		
+		<build>
+			<!--²å¼þÁÐ±í-->
+			<plugins>
+				<plugin>
+					<groupId></groupId>
+					<artifactId></artifactId>
+					<version></version>
+				</plugin>
+			<plugins>
+		</build>
+		<!--Í¨³£ÓÃÓÚ×ÓÄ£¿éÖÐ¶Ô¸¸Ä£¿éµÄ¼Ì³Ð-->
+		<parent></parent>
+		<!--ÓÃÀ´-->
+		<modules>
+			<module></module>
+		</modules>
+	</project>
+
+ÒÀÀµ·¶Î§£º
+	compile
+		ÕâÊÇÄ¬ÈÏ·¶Î§£¬Èç¹ûÎ´Ö¸¶¨ÔòÊ¹ÓÃ¡£±àÒëÒÀÀµÏîÔÚÏîÄ¿µÄËùÓÐÀàÂ·¾¶ÖÐ¶¼¿ÉÓÃ¡£´ËÍâ£¬ÕâÐ©ÒÀÀµÏî½«´«²¥µ½ÒÀÀµÏîÄ¿¡£
+	provided
+		ÕâÓë±àÒëºÜÏàËÆ£¬µ«±íÊ¾ÄúÏ£ÍûJDK»òÈÝÆ÷ÔÚÔËÐÐÊ±Ìá¹©ÒÀÀµ¹ØÏµ¡£ÀýÈç£¬ÔÚÎªJava Enterprise Edition¹¹½¨WebÓ¦ÓÃ³ÌÐòÊ±£¬
+		Äú¿ÉÒÔ½«Servlet APIºÍÏà¹ØJava EE APIµÄÒÀÀµ¹ØÏµÉèÖÃÎªÌá¹©µÄ·¶Î§£¬ÒòÎªWebÈÝÆ÷Ìá¹©ÁËÕâÐ©Àà¡£´Ë·¶Î§½öÔÚ±àÒëºÍ²âÊÔ
+		ÀàÂ·¾¶ÖÐ¿ÉÓÃ£¬²¢ÇÒ²»¿É´«µÝ¡£
+	runtime
+		´Ë·¶Î§Ö¸Ê¾±àÒë²»ÐèÒªÒÀÀµÏî£¬µ«ÊÇÓÃÓÚÖ´ÐÐ¡£ËüÎ»ÓÚÔËÐÐÊ±ºÍ²âÊÔÀàÂ·¾¶ÖÐ£¬µ«²»ÊÇ±àÒëÀàÂ·¾¶¡£
+	test
+		´Ë·¶Î§±íÊ¾Õý³£Ê¹ÓÃÓ¦ÓÃ³ÌÐò²»ÐèÒªÒÀÀµ¹ØÏµ£¬²¢ÇÒ½öÊÊÓÃÓÚ²âÊÔ±àÒëºÍÖ´ÐÐ½×¶Î¡£´Ë·¶Î§²»¾ßÓÐ´«µÝÐÔ¡£
+	system
+		´Ë·¶Î§ÓëÌá¹©µÄÀàËÆ£¬Ö»ÊÇÄú±ØÐëÌá¹©Ã÷È·°üº¬ËüµÄJAR¡£¹¤¼þÊ¼ÖÕ¿ÉÓÃ£¬²»»áÔÚ´æ´¢¿âÖÐ²éÕÒ¡£
+	import
+		´Ë·¶Î§½öÔÚ<dependencyManagement>²¿·ÖÖÐµÄpomÀàÐÍµÄÒÀÀµÏîÉÏÊÜÖ§³Ö¡£ËüÖ¸Ê¾ÒªÊ¹ÓÃÖ¸¶¨POMµÄ
+		<dependencyManagement>²¿·ÖÖÐµÄÓÐÐ§ÒÀÀµÏîÁÐ±íÌæ»»µÄÒÀÀµÏî¡£ÓÉÓÚËüÃÇ±»Ìæ»»£¬¾ßÓÐµ¼Èë·¶Î§µÄ
+		ÒÀÀµÐÔÊµ¼ÊÉÏ²»²ÎÓëÏÞÖÆÒÀÀµÐÔµÄ´«µÝÐÔ¡£
