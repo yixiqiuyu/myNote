@@ -22,4 +22,31 @@ maven的基本命令：
 		
 		clean 删除target
 		install 安装jar包到本地项目中
+
+自动创建目录骨架：
+	一般结构：
+		--src
+			--main
+				--java
+					主代码
+		--src
+			--test
+				测试代码
+	
+	命令：
+		（1）mvn archetype:generate
+			完成之后输入version
+			输入groupId
+			输入artifactId
+			输入版本
+			输入包名
+		（2）mvn archetype:generate -DgroupId=组织名，公司网址的反写+项目名 -DartifactId=项目名-模块名 -Dversion=版本号 
+			-Dpackage=代码所存在的包名
+
+maven中的坐标和仓库：
+	坐标
+		构件
+	仓库
+		本地仓库和远程仓库
+	镜像仓库：
 		
