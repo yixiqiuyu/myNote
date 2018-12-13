@@ -150,3 +150,19 @@ pom.xml常用元素介绍：
 		此范围仅在<dependencyManagement>部分中的pom类型的依赖项上受支持。它指示要使用指定POM的
 		<dependencyManagement>部分中的有效依赖项列表替换的依赖项。由于它们被替换，具有导入范围的
 		依赖性实际上不参与限制依赖性的传递性。
+
+依赖传递：
+	<dependence>
+		<groupId></groupId>
+		<artifactId></artifactId>
+		<version></version>
+	</dependence>
+
+依赖冲突：
+	1.短路径优先
+		A-->B-->C-->X(jar)
+		A-->D-->X(jar)优先
+	2.假如路径相同，谁在前谁优先
+	
+聚合和继承：
+	
